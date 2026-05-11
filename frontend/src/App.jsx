@@ -56,70 +56,95 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="app">
       <h1>Contacts</h1>
 
-      <div className="add-section">
+      <div className="add-card">
         <input
           placeholder="Name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value.replace(/[^a-zA-Z\s]/g, ""))}
+          onKeyDown={(e) => {
+            if (e.key === "Enter")
+              document.getElementById("phone-input").focus();
+          }}
         />
         <input
+          id="phone-input"
           placeholder="Phone"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={(e) => setPhone(e.target.value.replace(/[^0-9]/g, ""))}
         />
         <button className="btn-add" onClick={addContact}>
-          ADD
+          Add Contact
         </button>
       </div>
 
-      <ul>
+      <div className="contacts-list">
         {contacts.map((contact, i) => (
-          <li key={i}>
-            <span className="contact-info">
-              {contact.name} - {contact.phone}
-            </span>
-            <div className="contact-actions">
-              <button
-                className="btn-edit"
-                onClick={() => editContact(contact.id)}
-              >
-                EDIT
-              </button>
-              <button
-                className="btn-delete"
-                onClick={() => deleteContact(contact.id)}
-              >
-                DELETE
-              </button>
+          <div className="contact-card" key={i}>
+            <div className="contact-main">
+              <div className="contact-info">
+                <span className="contact-name">{contact.name}</span>
+                <span className="contact-phone">{contact.phone}</span>
+              </div>
+              <div className="contact-actions">
+                <button
+                  className="btn-edit"
+                  onClick={() => editContact(contact)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="btn-delete"
+                  onClick={() => deleteContact(contact.id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-          </li>
+
+            {editingContact && editingContact.id === contact.id && (
+              <div className="inline-edit">
+                <input
+                  placeholder="Name"
+                  value={editForm.name}
+                  onChange={(e) =>
+                    setEditForm({
+                      ...editForm,
+                      name: e.target.value.replace(/[^a-zA-Z\s]/g, ""),
+                    })
+                  }
+                />
+                <input
+                  placeholder="Phone"
+                  value={editForm.phone}
+                  onChange={(e) =>
+                    setEditForm({
+                      ...editForm,
+                      phone: e.target.value.replace(/[^0-9]/g, ""),
+                    })
+                  }
+                />
+                <div className="edit-actions">
+                  <button
+                    className="btn-update"
+                    onClick={() => updateContact(editingContact.id)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="btn-cancel"
+                    onClick={() => setEditingContact(null)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         ))}
-      </ul>
-      {editingContact && (
-        <div className="edit-section">
-          <input
-            placeholder="Name"
-            value={editForm.name}
-            onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-          />
-          <input
-            placeholder="Phone"
-            value={editForm.phone}
-            onChange={(e) =>
-              setEditForm({ ...editForm, phone: e.target.value })
-            }
-          />
-          <button
-            className="btn-update"
-            onClick={() => updateContact(editingContact.id)}
-          >
-            UPDATE
-          </button>
-        </div>
-      )}
+      </div>
     </div>
   );
 }

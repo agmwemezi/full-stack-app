@@ -5,14 +5,14 @@
 }
 
 body {
-  background: #0f0f13;
+  background: #0a0a0f;
   color: #e0e0e0;
   font-family: "Segoe UI", sans-serif;
   min-height: 100vh;
 }
 
-#root {
-  max-width: 600px;
+.app {
+  max-width: 500px;
   margin: 0 auto;
   padding: 40px 20px;
 }
@@ -24,23 +24,26 @@ h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 30px;
+  text-align: center;
 }
 
-.add-section {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
+h2 {
+  font-size: 1.1rem;
+  color: #a78bfa;
+  margin-bottom: 16px;
 }
+
 input {
-  flex: 1;
-  padding: 10px, 14px;
-  background: #1e1e2e;
-  border: 1px solid #2e2e3e;
-  border-radius: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  background: #13131a;
+  border: 1px solid #2a2a3a;
+  border-radius: 10px;
   color: #e0e0e0;
   font-size: 0.95rem;
   outline: none;
   transition: border 0.2s;
+  margin-bottom: 10px;
 }
 
 input:focus {
@@ -48,9 +51,9 @@ input:focus {
 }
 
 button {
-  padding: 10px 18px;
+  padding: 11px 20px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 600;
@@ -58,25 +61,126 @@ button {
 }
 
 button:hover {
-  opacity: 0.85;
+  opacity: 0.8;
+}
+
+.add-card {
+  background: #13131a;
+  border: 1px solid #2a2a3a;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 24px;
 }
 
 .btn-add {
+  width: 100%;
   background: linear-gradient(135deg, #a78bfa, #60a5fa);
   color: white;
+  -webkit-text-fill-color: white;
+  margin-top: 4px;
 }
+
+.contacts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-card {
+  background: #13131a;
+  border: 1px solid #2a2a3a;
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: border 0.2s;
+}
+
+.contact-card:hover {
+  border-color: #a78bfa;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-right: 10px;
+}
+
+.contact-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+.contact-phone {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 8px;
+  margin-right: 10px;
+}
+
 .btn-edit {
-  background: 2e2e3e;
+  background: #1e1e2e;
   color: #a78bfa;
-  margin-left: 10px;
+  border: 1px solid #a78bfa44;
 }
 
 .btn-delete {
-  background: 2e2e3e;
+  background: #1e1e2e;
   color: #f87171;
-  margin-left: 6px;
+  border: 1px solid #f8717144;
 }
+
+.edit-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.edit-card {
+  background: #13131a;
+  border: 1px solid #a78bfa;
+  border-radius: 16px;
+  padding: 28px;
+  width: 90%;
+  max-width: 420px;
+}
+
+.inline-edit input {
+  border: 1px solid #3a3a4a;
+  background: #0a0a0f;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
 .btn-update {
+  flex: 1;
   background: linear-gradient(135deg, #a78bfa, #60a5fa);
   color: white;
+  -webkit-text-fill-color: white;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: #1e1e2e;
+  color: #888;
+  -webkit-text-fill-color: white;
+  border: 1px solid #2a2a3a;
 }
